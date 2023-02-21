@@ -30,19 +30,19 @@ def vis(img, boxes, scores, cls_ids, conf=0.5, class_names=None, label_pos="uppe
         cv2.rectangle(img, (x0, y0), (x1, y1), color, 2)
 
         if label_pos == "upper":
-            l_x = x0
+            label_y = y0
         elif label_pos == "lower":
-            l_x = x1
+            label_y = y1
 
         txt_bk_color = (_COLORS[cls_id] * 255 * 0.7).astype(np.uint8).tolist()
         cv2.rectangle(
             img,
-            (l_x, y0 + 1),
-            (l_x + txt_size[0] + 1, y0 + int(1.5*txt_size[1])),
+            (x0, label_y + 1),
+            (x0 + txt_size[0] + 1, label_y + int(1.5*txt_size[1])),
             txt_bk_color,
             -1
         )
-        cv2.putText(img, text, (x0, y0 + txt_size[1]), font, 0.4, txt_color, thickness=1)
+        cv2.putText(img, text, (x0, label_y + txt_size[1]), font, 0.4, txt_color, thickness=1)
 
     return img
 
